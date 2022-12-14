@@ -15,7 +15,7 @@ octokit
     owner: payload.repository.owner.login,
     repo: payload.repository.name,
     sha: payload.pull_request.head.sha,
-    state: isWip ? "pending" : "success",
+    state: isWip ? "failure" : "success",
     target_url: "https://github.com/knu/wip",
     description: (isWip ? "work in progress" : "ready for review") + "/" + JSON.stringify(payload.pull_request.labels),
     context: "WIP (action)",
