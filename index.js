@@ -1,6 +1,8 @@
 const { Octokit } = require("@octokit/action");
 const payload = require(process.env.GITHUB_EVENT_PATH);
 
+console.log(JSON.stringify(payload.pull_request));
+
 const pattern = /\bwip\b|🚧/i;
 const isWip =
   pattern.test(payload.pull_request.title) ||
