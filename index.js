@@ -1,7 +1,10 @@
 const { Octokit } = require("@octokit/action");
 const payload = require(process.env.GITHUB_EVENT_PATH);
 
-const isWip = /\bwip\b/i.test(payload.pull_request.title);
+const pattern = /\bwip\b|🚧/i;
+const isWip =
+  pattern.test(payload.pull_request.title) ||
+  payload.pull_request.labels.some(({ name }) => pattern.test(name));
 const octokit = new Octokit();
 
 // https://developer.github.com/v3/repos/statuses/#create-a-status
