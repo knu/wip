@@ -14,7 +14,7 @@ octokit
     repo: payload.repository.name,
     sha: payload.pull_request.head.sha,
     state: isWip ? "pending" : "success",
-    target_url: "https://github.com/wip/action",
+    target_url: "https://github.com/knu/wip",
     description: isWip ? "work in progress" : "ready for review",
     context: "WIP (action)",
   })
