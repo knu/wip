@@ -1,6 +1,8 @@
 const { Octokit } = require("@octokit/action");
 const payload = require(process.env.GITHUB_EVENT_PATH);
 
+console.log(payload.pull_request);
+
 const pattern = /\bwip\b|🚧/i;
 const isWip =
   pattern.test(payload.pull_request.title) ||
@@ -15,7 +17,7 @@ octokit
     sha: payload.pull_request.head.sha,
     state: isWip ? "pending" : "success",
     target_url: "https://github.com/knu/wip",
-    description: isWip ? "work in progress" : "ready for review",
+    description: (isWip ? "work in progress" : "ready for review") + "/" + JSON.stringify(payload.pull_request.labels),
     context: "WIP (action)",
   })
   .catch(console.error);
